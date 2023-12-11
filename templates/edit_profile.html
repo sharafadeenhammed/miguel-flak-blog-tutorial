@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="/static/styles/login.css">
+  <p class="header">Edit Profile</p>
+  <form method="post" action="" novalidate>
+    {{form.hidden_tag()}}
+    <div class="profile-photo-container">
+    
+    <div class="input-container">
+      {{form.username.label(class_='label')}}
+      {{form.username(class_='form-input')}}
+      <!-- username error -->
+      {% for error in form.username.errors %}
+        <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <div class="input-container">
+      {{form.about.label(class_='label')}}
+      {{form.about(class_='form-input')}}
+      <!-- about error -->
+      {% for error in form.about.errors %}
+      <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+    
+    <div class="input-container">
+      {{form.submit(class_='submit-btn')}}
+    </div>
+  </form>
+
+{% endblock %}

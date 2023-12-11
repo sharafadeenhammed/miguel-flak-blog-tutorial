@@ -1,0 +1,12 @@
+  {% extends 'base.html' %}
+
+  {% block content%}
+  <p>
+    <a href="{{url_for('add_post')}}"> add post</a>
+  </p>
+    {% for post in posts %}
+      <p style="text-decoration: underline;"><a href="/post/{{post.id}}"> {{post.title}}</a></p>
+      <article> {{post.body}}</article>
+      <br>
+    {% endfor %}
+  {% endblock %}

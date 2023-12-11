@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="/static/styles/login.css">
+  <p class="header">Add Post</p>
+  <form method="post" action="" novalidate>
+    {{form.hidden_tag()}}    
+
+    <div class="input-container">
+      {{form.title.label(class_='label')}}
+      {{form.title(class_='form-input')}}
+      <!-- title error -->
+      {% for error in form.title.errors %}
+      <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <div class="input-container">
+      {{form.body.label(class_='label')}}
+      {{form.body(class_='form-input')}}
+      <!-- body error -->
+      {% for error in form.body.errors %}
+      <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+    
+    <div class="input-container">
+      {{form.submit(class_='submit-btn')}}
+    </div>
+  </form>
+
+{% endblock %}

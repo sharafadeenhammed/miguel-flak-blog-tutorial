@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/styles/login.css">
+  <p class="header">Register</p>
+  <form method="POST" action="" novalidate>
+    {{form.hidden_tag()}}
+    <!-- user name container -->
+    <div class="input-container">
+      {{form.username.label(class_='label')}}
+      {{form.username(class_='form-input')}}
+      <!-- username error -->
+      {% for error in form.username.errors %}
+      <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <!-- email container -->
+    <div class="input-container">
+      {{form.email.label(class_='label')}}
+      {{form.email(class_='form-input')}}
+      <!-- email error -->
+      {% for error in form.email.errors %}
+      <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <!-- password container -->
+    <div class="input-container">
+      {{form.password.label(class_='label')}}
+      {{form.password(class_='form-input')}}
+      <!-- password error -->
+      {% for error in form.password.errors %}
+        <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <!-- password container -->
+    <div class="input-container">
+      {{form.confirm.label(class_='label')}}
+      {{form.confirm(class_='form-input')}}
+      <!-- confirm error -->
+      {% for error in form.confirm.errors %}
+        <p class="field-error">{{error}}</p>
+      {% endfor %}
+    </div>
+
+    <div class="input-container">
+      {{form.remember_me}}
+      {{form.remember_me.label}}
+    </div>
+
+    <div class="input-container">
+      {{form.submit(class_='submit-btn')}}
+    </div>
+
+  </form>
+
+{% endblock %}

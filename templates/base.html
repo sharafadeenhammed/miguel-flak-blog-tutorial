@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if title %}
+    <title>{{title}}</title>
+  {% else %}
+    <title>Flask App</title>
+  {% endif %}
+
+  <link rel="stylesheet" href="/static/styles/base.css">
+</head>
+<body>
+  <nav>
+   
+    <ul class="nav-bar">
+      <p class="logo">BLOG </p>
+      <li>
+        <a href="{{url_for('index')}}">Home</a>
+      </li>
+      {% if current_user.is_authenticated %}
+        <li>
+          <a href="{{url_for('profile')}}">profile</a>
+        </li>
+        <li>
+          <a href="{{url_for('logout')}}">logout</a>
+        </li>
+      {% else %}
+      <li>
+        <a href="/login">Login</a>
+      </li>
+      <li>
+        <a href="/register">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories = True) %} 
+    {% if messages %}
+      {% for category, message in messages %}
+        <p class="msg {{category}}" > {{message}}</p>
+      {% endfor %}
+    {% else %}
+    {% endif %}
+
+  {% endwith %}
+
+  {% block content%}
+
+  {% endblock %}
+</div>
+  
+</body>
+<script src="/static/js/removemsg.js" ></script>
+</html>

@@ -1,0 +1,61 @@
+.label{
+  display: block;
+}
+
+.form-input{
+  display: block;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  padding:5px 10px;
+  margin-bottom: 2px;
+}
+
+.input-container{
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+
+.submit-btn{
+  padding:10px 15px;
+  background-color: rgb(41, 140, 211);
+  color:#fff;
+  border-radius: 5px;
+  font-weight:700;
+  display: block;
+  outline: none;
+  border:none;
+  transition: background-color 0.2s;
+
+}
+
+.submit-btn:hover{
+  background-color: rgb(5, 104, 174);
+
+}
+
+.delete-btn{
+  padding:10px 15px;
+  background-color: rgb(211, 44, 41);
+  color:#fff;
+  border-radius: 5px;
+  font-weight:700;
+  display: block;
+  outline: none;
+  border:none;
+  transition: background-color 0.2s;
+
+}
+
+.delete-btn:hover{
+  background-color: rgb(174, 5, 5);
+
+}
+
+@media(min-width:700px){
+  .form-input{
+    width:50%
+  }
+}
