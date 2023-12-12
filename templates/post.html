@@ -5,7 +5,7 @@
 <p class="header">{{post.title}}</p>
   <p>
     {% if current_user.id == post.user_id %} 
-      <a href="/edit_post/{{post.id}}">edit</a>
+      <a class="submit-btn" style="width:80px;margin: 20px 0px;" href="/edit_post/{{post.id}}">edit</a>
       <form method="POST" action="/post/{{post.id}}">
         <button type="submit" class="delete-btn">delete post</button>
       </form>

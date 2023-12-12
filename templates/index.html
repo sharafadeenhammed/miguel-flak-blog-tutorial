@@ -2,10 +2,20 @@
 
   {% block content%}
   <p>
-    <a href="{{url_for('add_post')}}"> add post</a>
+    <a class="submit-btn" href="{{url_for('add_post')}}"> add post</a>
   </p>
+  <br>
     {% for post in posts %}
-      <p style="text-decoration: underline;"><a href="/post/{{post.id}}"> {{post.title}}</a></p>
+      <p>
+        <img src="{{post.author.avatar(40)}}">
+        <a href="/post/{{post.id}}">view</a>
+        <span>&nbsp;</span>
+        {% if current_user.id != post.author.id %}
+          <a href="/user/{{post.author.id}}">
+            view {{post.author.username}} profile
+          </a>
+        {% endif %}
+      </p>
       <article> {{post.body}}</article>
       <br>
     {% endfor %}

@@ -141,12 +141,14 @@ def add_post():
 
 # get single post
 @app.route('/post/<id>')
+@login_required
 def get_post(id):
   post = Post.query.get_or_404(int(id))
   return render_template('post.html', post=post)
 
 # delete single post
 @app.route('/post/<id>', methods = ['POST'])
+@login_required
 def delete_post(id):
   post = Post.query.get_or_404(int(id))
   db.session.delete(post)
@@ -156,9 +158,35 @@ def delete_post(id):
 
 # update/edit post
 @app.route('/edit_post/<id>')
+@login_required
 def edit_post(id):
   post = Post.query.get_or_404(int(id))
   return render_template('post.html', post=post)
+
+# fololow user
+@app.route('/follow/<id>')
+@login_required
+def follow(id):
+  user = User.query.get(id)
+  if(current_user.is_following(user)):
+    current_user.unfollow(user)
+    flash(f'you are no more following {user.username}', 'success')
+    return redirect(url_for('index'))
+  else:
+    current_user.follow(user)
+    flash(f'you are now following {user.username}', 'success')
+    return redirect(url_for('index'))
+
+# display user profile...
+@app.route('/user/<id>')
+@login_required
+def user_profile(id):
+  user = User.query.get(id)
+  if not user:
+    flash('this user profile cannot be found , profile probably deleted or suspended !', 'error')
+  return render_template('user.html', user=user)
+
+
 
 
 
