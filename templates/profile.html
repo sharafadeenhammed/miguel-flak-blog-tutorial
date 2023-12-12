@@ -5,16 +5,26 @@
 {% block content %}
   <p class="header">Profile</p>
   <div class="profile-photo-container">
-    <p>profile photo</p>
-    <img class="profile-photo" src="{{current_user.avatar()}}" alt="{{current_user.username}}"/>
+    <img class="profile-photo" src="{{current_user.avatar()}}" alt="photo"/>
     <p><a href="{{url_for('update_profile')}}"> update profile</a></p>
   </div>
-  <br><br>
+  {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+  <p>{{ user.follower.count() }} followers, {{ user.followed.count() }} following.</p>
   <p>{{current_user.username}}</p>
   <p>{{current_user.email}}</p>
   <p>{{current_user.last_seen}}</p>
-  {% if current_user.about_me != None %}
-    <p>{{current_user.about_me}}</p>
-  {% endif %}
+  {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+
+
+  <br><br>
+  {% for post in posts %}
+  <br>
+      <article> 
+        <h4>{{post.title}}</h4>
+        {{post.body}}
+        <a href="/post/{{post.id}}">view</a>
+      </article>
+  <br>
+    {% endfor %}
 
 {% endblock %}

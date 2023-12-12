@@ -52,7 +52,14 @@ def validate():
 @login_required
 def index():
   post = current_user.followed_posts()
-  return render_template('index.html', title = 'Welocome', posts = post)
+  return render_template('index.html', title = 'Welcome', posts = post)
+
+# explore page
+@app.route('/explore')
+@login_required
+def explore():
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title='Explore', posts=posts)
 
 # login route
 @app.route("/login/", methods=['GET', 'POST'])
@@ -110,7 +117,7 @@ def register():
 @app.route('/profile')
 @login_required
 def profile():
-  return render_template('profile.html', title='Profile', user = current_user)
+  return render_template('profile.html', title='Profile', user = current_user, posts = current_user.posts)
 
 
 # update user profile
@@ -186,7 +193,7 @@ def follow(id):
 def user_profile(id):
   user = User.query.get(id)
   if user == None:
-    flash('this user profile cannot be found , profile probably deleted or suspended !', 'error')
+    flash('this user profile cannot be found, profile may have been deleted or suspended !', 'error')
     return redirect(url_for('index'))
   return render_template('user.html', user=user, posts = user.posts)
 

@@ -20,15 +20,18 @@
         <a href="{{url_for('index')}}">Home</a>
       </li>
       {% if current_user.is_authenticated %}
-        <li>
-          <a href="{{url_for('profile')}}">profile</a>
-        </li>
-        <li>
-          <a href="{{url_for('logout')}}">logout</a>
-        </li>
-        <li>
-          <a href="{{url_for('add_post')}}"> add post</a>
-        </li>
+      <li>
+        <a href="{{url_for('add_post')}}"> Add post</a>
+      </li>
+      <li>
+        <a href="{{url_for('explore')}}">Explore</a>
+      </li>
+      <li>
+        <a href="{{url_for('profile')}}">Profile</a>
+      </li>
+      <li>
+        <a href="{{url_for('logout')}}">Logout</a>
+      </li>
       {% else %}
       <li>
         <a href="/login">Login</a>

@@ -11,7 +11,7 @@
     
     <div class="input-container">
       {{form.username.label(class_='label')}}
-      {{form.username(class_='form-input')}}
+      {{form.username(class_='form-input', value = current_user.username)}}
       <!-- username error -->
       {% for error in form.username.errors %}
         <p class="field-error">{{error}}</p>
@@ -20,7 +20,7 @@
 
     <div class="input-container">
       {{form.about.label(class_='label')}}
-      {{form.about(class_='form-input')}}
+      {{form.about(class_='form-input', value = current_user.about_me)}}
       <!-- about error -->
       {% for error in form.about.errors %}
       <p class="field-error">{{error}}</p>
