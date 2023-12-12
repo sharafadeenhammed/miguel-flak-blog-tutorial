@@ -35,6 +35,15 @@ class User(db.Model, UserMixin):
     lazy = 'dynamic'
   )
   
+  follower = db.relationship(
+    'User',
+    secondary = followers,
+    primaryjoin = (followers.c.followed_id == id),
+    secondaryjoin = (followers.c.follower_id == id),
+    backref = db.backref('followed_user', lazy='dynamic'),
+    lazy = 'dynamic'
+  )
+  
   def __init__(self, username, email, password):
     self.username = username
     self.email = email
@@ -81,7 +90,6 @@ class User(db.Model, UserMixin):
   @login.user_loader
   def get_user(id):
     return User.query.get(int(id))
-  
   
   def own_post(self):
     own_posts = Post.query.filter(Post.user_id == self.id).all()

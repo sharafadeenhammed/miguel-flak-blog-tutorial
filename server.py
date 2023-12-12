@@ -167,24 +167,28 @@ def edit_post(id):
 @app.route('/follow/<id>')
 @login_required
 def follow(id):
+  if(current_user.id == int(id)):
+    flash(f'you cannot follow your self', 'error')
+    return redirect(f'/user/{id}')
   user = User.query.get(id)
   if(current_user.is_following(user)):
     current_user.unfollow(user)
     flash(f'you are no more following {user.username}', 'success')
-    return redirect(url_for('index'))
+    return redirect(f'/user/{user.id}')
   else:
     current_user.follow(user)
     flash(f'you are now following {user.username}', 'success')
-    return redirect(url_for('index'))
+    return redirect(f'/user/{user.id}')
 
 # display user profile...
 @app.route('/user/<id>')
 @login_required
 def user_profile(id):
   user = User.query.get(id)
-  if not user:
+  if user == None:
     flash('this user profile cannot be found , profile probably deleted or suspended !', 'error')
-  return render_template('user.html', user=user)
+    return redirect(url_for('index'))
+  return render_template('user.html', user=user, posts = user.posts)
 
 
 

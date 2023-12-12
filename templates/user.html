@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<section>
+  <img src="{{user.avatar(100)}}" alt="photo">
+  <span>username:  {{user.username}}</span>
+  <span> &nbsp;</span>
+    {% if current_user.id != user.id %}
+      {% if current_user.is_following(user) %}
+        <a href="/follow/{{user.id}}"> unfollow </a>
+      {% else %}
+        <a href="/follow/{{user.id}}"> follow </a>
+      {% endif %}
+    {% endif %}
+  
+  <br>
+  <sapn>email: {{user.email}}</sapn>
+  {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+  {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+  <p>{{ user.follower.count() }} followers, {{ user.followed.count() }} following.</p>
+</section>
+
+<section>
+  <br> <br>
+  {% for post in posts %}
+      <p>
+        {{post.title}}
+        &nbsp;
+        <a href="/post/{{post.id}}">view</a>
+      </p>
+      <br>
+    {% endfor %}
+</section>
+  
+{% endblock %}

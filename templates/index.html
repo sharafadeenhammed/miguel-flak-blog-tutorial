@@ -1,9 +1,6 @@
   {% extends 'base.html' %}
 
   {% block content%}
-  <p>
-    <a class="submit-btn" href="{{url_for('add_post')}}"> add post</a>
-  </p>
   <br>
     {% for post in posts %}
       <p>

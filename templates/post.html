@@ -3,7 +3,12 @@
 {% block content %}
 <link rel="stylesheet" href="/static/styles/login.css">
 <p class="header">{{post.title}}</p>
-  <p>
+<p>
+  this post id written by {{post.author.username}}
+  &nbsp;
+  <a href="/user/{{post.author.id}}"> view author profile </a>
+</p>
+
     {% if current_user.id == post.user_id %} 
       <a class="submit-btn" style="width:80px;margin: 20px 0px;" href="/edit_post/{{post.id}}">edit</a>
       <form method="POST" action="/post/{{post.id}}">
