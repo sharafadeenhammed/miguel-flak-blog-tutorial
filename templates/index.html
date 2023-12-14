@@ -1,8 +1,9 @@
   {% extends 'base.html' %}
 
   {% block content%}
+  <link rel="stylesheet" href="/static/styles/login.css"/>
   <br>
-    {% for post in posts %}
+    {% for post in posts.items %}
       <p>
         <img src="{{post.author.avatar(40)}}">
         <a href="/post/{{post.id}}">view</a>
@@ -16,4 +17,12 @@
       <article> {{post.body}}</article>
       <br>
     {% endfor %}
+    <br>
+    {% if posts.has_next %}
+      <a class="submit-btn" style="width:100px" href="?page={{posts.next_num}}"> next</a>
+    {% endif %}
+    {% if posts.has_prev %}
+      <a class="submit-btn" style="width:100px" href="?page={{posts.prev_num}}"> prev</a>
+    {% endif %}
   {% endblock %}
+

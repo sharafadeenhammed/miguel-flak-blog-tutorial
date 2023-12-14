@@ -51,14 +51,16 @@ def validate():
 # @app.route('/index')
 @login_required
 def index():
-  post = current_user.followed_posts()
-  return render_template('index.html', title = 'Welcome', posts = post)
+  page = request.args.get('page', 1, int)
+  posts = current_user.followed_posts().paginate(page = page, per_page = app.config['POST_PER_PAGE'], error_out= False)
+  return render_template('index.html', title = 'Welcome', posts = posts)
 
 # explore page
 @app.route('/explore')
 @login_required
 def explore():
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    page = request.args.get('page', 1, int)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page = page, per_page = app.config['POST_PER_PAGE'], error_out= False)
     return render_template('index.html', title='Explore', posts=posts)
 
 # login route
