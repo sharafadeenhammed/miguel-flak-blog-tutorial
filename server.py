@@ -45,6 +45,12 @@ class PostForm(FlaskForm):
   title = StringField('Title', validators=[validators.DataRequired()])
   body = TextAreaField('Post Body', validators=[validators.DataRequired()])
   submit = SubmitField('Submit post')
+  
+
+# reset password form 
+class ResetPassword(FlaskForm):
+  email = StringField('Email', validators=[validators.DataRequired(), validators.Email('Please enter a valid email address')])
+  submit = SubmitField('Request Reset Password')
 
 basedir = path.abspath(path.dirname(__file__))
 static_folder = path.join(basedir, 'templates', 'styles')
@@ -208,6 +214,17 @@ def user_profile(id):
     flash('this user profile cannot be found, profile may have been deleted or suspended !', 'error')
     return redirect(url_for('index'))
   return render_template('user.html', user=user, posts = user.posts)
+
+
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password():
+  if current_user.is_authenticated:
+    return redirect(url_for('index'))
+  form = ResetPassword()
+  if form.validate_on_submit():
+    print('form okay...')
+  
+  return render_template('request_reset_password.html', form = form)
 
 
 
