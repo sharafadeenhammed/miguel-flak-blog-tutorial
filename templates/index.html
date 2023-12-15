@@ -19,10 +19,10 @@
     {% endfor %}
     <br>
     {% if posts.has_next %}
-      <a class="submit-btn" style="width:100px" href="?page={{posts.next_num}}"> next</a>
+      <a class="submit-btn" style="width:150px" href="?page={{posts.next_num}}"> next page</a>
     {% endif %}
     {% if posts.has_prev %}
-      <a class="submit-btn" style="width:100px" href="?page={{posts.prev_num}}"> prev</a>
+      <a class="submit-btn" style="width:150px" href="?page={{posts.prev_num}}"> prev page</a>
     {% endif %}
   {% endblock %}
 

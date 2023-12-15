@@ -1,10 +1,11 @@
-from os import path
+from os import path, mkdir
 from app import app, db
-from flask import render_template, request, flash, redirect, url_for, session
-from config import Config
+import logging
+from logging.handlers import SMTPHandler, RotatingFileHandler
+from flask import render_template, request, flash, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, validators, TextAreaField
-from models import User, Post, followers
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, validators, TextAreaField, ValidationError
+from models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
 
 # login form 
@@ -29,6 +30,15 @@ class UpdateUserForm(FlaskForm):
   username = StringField('Username', validators=[validators.DataRequired()])
   about = TextAreaField('About Me', validators=[validators.Length( max=150)])
   submit = SubmitField('Submit')
+  def __init__(self, original_username, *args, **kwargs):
+    super(UpdateUserForm, self).__init__(*args, **kwargs)
+    self.original_username = original_username
+
+  def validate_username(self, username):
+    if username.data != self.original_username:
+      user = User.query.filter_by(username=self.username.data).first()
+    if user is not None:
+      raise ValidationError('Please use a different username.')
   
 # post form 
 class PostForm(FlaskForm):
@@ -126,7 +136,7 @@ def profile():
 @app.route('/update_profile', methods=['GET', 'POST'])
 @login_required
 def update_profile():
-  form = UpdateUserForm()
+  form = UpdateUserForm(current_user.username)
   if form.validate_on_submit():
     current_user.about_me = form.about.data
     current_user.username = form.username.data
@@ -202,8 +212,39 @@ def user_profile(id):
 
 
 
+#  log error
+if not app.debug and app.config['MAIL_SERVER']:
+  auth = None
+  if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
+    auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+  secure = None
+  if app.config['MAIL_USE_TLS']:
+    secure = ()
+  mail_handler = SMTPHandler(
+      mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+      fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+      toaddrs=app.config['ADMINS'], subject='Microblog Failure',
+      credentials=auth, secure=secure
+  )
+  mail_handler.setLevel(logging.ERROR)
+  app.logger.addHandler(mail_handler)
+  
+  if not path.exists('logs'):
+    mkdir('logs')
+    file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+      '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+    ))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Microblog startup')
+
 
 # start server
 if __name__ == '__main__':
   app.run(port=8000, debug=True, load_dotenv=True)
+  
+
+
   

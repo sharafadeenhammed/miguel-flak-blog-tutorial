@@ -13,6 +13,8 @@ flask-wtf = "*"
 python-dotenv = "*"
 email-validator = "*"
 marshmallow-sqlalchemy = "*"
+flask-mail = "*"
+pyjwt = "*"
 
 [dev-packages]
 
