@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Reset</title>
+</head>
+<body>
+  
+  <h3>
+    Dear {{user.username}},
+  </h3>
+  <br>
+  <p>
+    To reset your password <a href="{{url_for('reset_password', token=token, _external=True)}}">here</a>
+
+  </p>
+  <p> 
+    Alternatively you can paste the following link below into your browse address bar:
+  </p>
+  <p>{{url_for('reset_password', token=token, _external=True)}}</p>
+  <p>if you have not requested a password reset, simply ignore this message.</p>
+  <p>Yours Sincerly,</p>
+  <br>
+  <p><strong>
+    The Microblog Team
+  </strong></p>
+</body>
+</html>

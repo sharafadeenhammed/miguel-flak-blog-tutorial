@@ -7,6 +7,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, validators, TextAreaField, ValidationError
 from models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
+from mail import send_password_reset_email
+
 
 # login form 
 class LoginForm(FlaskForm):
@@ -48,9 +50,14 @@ class PostForm(FlaskForm):
   
 
 # reset password form 
-class ResetPassword(FlaskForm):
+class RequestResetPassword(FlaskForm):
   email = StringField('Email', validators=[validators.DataRequired(), validators.Email('Please enter a valid email address')])
   submit = SubmitField('Request Reset Password')
+  
+class ResetPassword(FlaskForm):
+  password = PasswordField('Password', validators=[validators.DataRequired()])
+  confirm_password = PasswordField('Confirm Password', validators=[validators.DataRequired(), validators.equal_to('password')])
+  submit = SubmitField('Reset Password')
 
 basedir = path.abspath(path.dirname(__file__))
 static_folder = path.join(basedir, 'templates', 'styles')
@@ -217,15 +224,36 @@ def user_profile(id):
 
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
-def reset_password():
+def reset_password_request():
   if current_user.is_authenticated:
     return redirect(url_for('index'))
-  form = ResetPassword()
+  form = RequestResetPassword()
   if form.validate_on_submit():
-    print('form okay...')
+    user = User.query.filter_by(email = form.email.data).first()
+    if user: 
+      send_password_reset_email(user)
+      print('#send_pssword_request_email(user)', user)
+    
+    flash('Check your email for instructions on how to reset your password.')
+    return redirect(url_for('login'))
   
   return render_template('request_reset_password.html', form = form)
 
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+  if current_user.is_authenticated: return url_for('index')
+  user = User.verify_reset_password_token(token)
+  if not token: return redirect(url_for('index'))
+  form = ResetPassword()
+  if form.validate_on_submit():
+    user.password = form.password.data
+    user.hash_password()
+    db.session.add(user)
+    db.session.commit()
+    flash('your password has been reset')
+    return redirect(url_for('login'))
+  return render_template('reset_password.html', form = form)
+  
 
 
 
@@ -260,7 +288,7 @@ if not app.debug and app.config['MAIL_SERVER']:
 
 # start server
 if __name__ == '__main__':
-  app.run(port=8000, debug=True, load_dotenv=True)
+  app.run(port=8000, load_dotenv=True)
   
 
 
