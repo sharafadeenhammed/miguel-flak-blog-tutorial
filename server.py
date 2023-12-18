@@ -8,6 +8,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, valid
 from models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
 from mail import send_password_reset_email
+from flask_babel import _, lazy_gettext as _l
 
 
 # login form 
@@ -40,7 +41,7 @@ class UpdateUserForm(FlaskForm):
     if username.data != self.original_username:
       user = User.query.filter_by(username=self.username.data).first()
     if user is not None:
-      raise ValidationError('Please use a different username.')
+      raise ValidationError(_('Please use a different username.'))
   
 # post form 
 class PostForm(FlaskForm):
@@ -71,7 +72,7 @@ def validate():
 
 # home route
 @app.route("/")
-# @app.route('/index')
+@app.route('/index')
 @login_required
 def index():
   page = request.args.get('page', 1, int)
@@ -97,19 +98,18 @@ def login():
   # validate login
   if form.validate_on_submit():
     user = User.query.filter_by(username = form.username.data).first()
-    
     # validate user credentials
     if user == None or user.match_password(form.password.data) == False:
-      flash('Invalid login credentials','error')
+      flash(_('Invalid login credentials'),'error')
       return redirect(url_for('login'))
     
     next_url = request.args.get('next')
     if(next_url):
       print(f'next url={next_url}')
-      flash(f'welcome {form.username.data}, you are logged in succesfully ', category='success')
+      flash(_('welcome %(username)s, you are logged in succesfully ', username = form.username.data), category='success')
       login_user(user, remember=form.remember_me.data)
       return redirect(next_url)
-    flash(f'welcome {form.username.data} ', category='success')
+    flash(_('Bem-vindo %(username)s ', username = form.username.data), category='success')
     login_user(user, remember=form.remember_me.data)
     return redirect(url_for('index'))
       
@@ -185,7 +185,7 @@ def delete_post(id):
   post = Post.query.get_or_404(int(id))
   db.session.delete(post)
   db.session.commit()
-  flash(f'post deleted sucessfully', 'success')
+  flash(_('post deleted sucessfully'), 'success')
   return redirect(url_for('index'))
 
 # update/edit post
@@ -200,12 +200,12 @@ def edit_post(id):
 @login_required
 def follow(id):
   if(current_user.id == int(id)):
-    flash(f'you cannot follow your self', 'error')
+    flash(_('you cannot follow your self'), 'error')
     return redirect(f'/user/{id}')
   user = User.query.get(id)
   if(current_user.is_following(user)):
     current_user.unfollow(user)
-    flash(f'you are no more following {user.username}', 'success')
+    flash(_('you are no more following {user.username}', 'success'))
     return redirect(f'/user/{user.id}')
   else:
     current_user.follow(user)
@@ -231,9 +231,7 @@ def reset_password_request():
   if form.validate_on_submit():
     user = User.query.filter_by(email = form.email.data).first()
     if user: 
-      send_password_reset_email(user)
-      print('#send_pssword_request_email(user)', user)
-    
+      send_password_reset_email(user)    
     flash('Check your email for instructions on how to reset your password.')
     return redirect(url_for('login'))
   
@@ -288,7 +286,7 @@ if not app.debug and app.config['MAIL_SERVER']:
 
 # start server
 if __name__ == '__main__':
-  app.run(port=8000, load_dotenv=True)
+  app.run(port=8000)
   
 
 

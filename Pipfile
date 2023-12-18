@@ -15,6 +15,9 @@ email-validator = "*"
 marshmallow-sqlalchemy = "*"
 flask-mail = "*"
 pyjwt = "*"
+requests = "*"
+flask-moment = "*"
+flask-babel = "*"
 
 [dev-packages]
 

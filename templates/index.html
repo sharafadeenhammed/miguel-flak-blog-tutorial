@@ -3,16 +3,16 @@
   {% block content%}
   <link rel="stylesheet" href="/static/styles/login.css"/>
   <br>
+    {% if posts.items|length < 1 %}
+      <center> <h2 class="header">No Posts </h2></center>
+    {% else %}
+      <center> <h2 class="header">Posts </h2></center>
+    {% endif %}
     {% for post in posts.items %}
       <p>
         <img src="{{post.author.avatar(40)}}">
         <a href="/post/{{post.id}}">view</a>
         <span>&nbsp;</span>
-        {% if current_user.id != post.author.id %}
-          <a href="/user/{{post.author.id}}">
-            view {{post.author.username}} profile
-          </a>
-        {% endif %}
       </p>
       <article> {{post.body}}</article>
       <br>

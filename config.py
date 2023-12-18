@@ -16,3 +16,4 @@ class Config:
   MAIL_PASSWORD = environ.get('MAIL_PASSWORD') or 'HSallah123.'
   ADMINS = ['your-email@example.com']
   TESTING = True
+  LANGUAGES = ['en', 'es']
