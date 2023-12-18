@@ -27,25 +27,23 @@ body{
 }
 
 .nav-bar>li{
-  background-color: rgb(255, 255, 255);
-  color:black;
-  padding:5px;
-  margin-right: 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  border: solid 1px rgb(179, 178, 178);
   list-style: none;
   text-align: center;
-  transition: all 0.1s;
 }
 
 .nav-bar>li>a{
-  color: black;
+  background-color: rgb(255, 255, 255);
+  color: rgb(77, 74, 74);
+  padding: 5px;
   text-decoration: none;
+  transition: all 0.1s;
+  margin-right: 10px;
   text-align: center;
+  border: solid 1px rgb(179, 178, 178);
+  border-radius: 3px;
 }
 
-.nav-bar>li:hover{
+.nav-bar>li>a:hover{
   background-color: #f4f4f4;
 }
 

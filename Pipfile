@@ -18,6 +18,8 @@ pyjwt = "*"
 requests = "*"
 flask-moment = "*"
 flask-babel = "*"
+jinja2 = "*"
+setuptools = "*"
 
 [dev-packages]
 

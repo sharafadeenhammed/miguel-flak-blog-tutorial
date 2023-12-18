@@ -76,8 +76,8 @@ class UpdateUserForm(FlaskForm):
   def validate_username(self, username):
     if username.data != self.original_username:
       user = User.query.filter_by(username=self.username.data).first()
-    if user is not None:
-      raise ValidationError(_l('Please use a different username.'))
+      if user is not None:
+        raise ValidationError(_l('Please use a different username.'))
   
 # post form 
 class PostForm(FlaskForm):

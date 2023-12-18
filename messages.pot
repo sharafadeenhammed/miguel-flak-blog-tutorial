@@ -1,0 +1,315 @@
+# Translations template for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-12-18 14:29+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: app.py:22
+msgid "Please log in to access this page."
+msgstr ""
+
+#: server.py:17 server.py:33 server.py:64
+msgid "Username"
+msgstr ""
+
+#: server.py:21 server.py:44 server.py:105
+msgid "Password"
+msgstr ""
+
+#: server.py:24 server.py:47 server.py:54
+msgid "Enter at leaast 8 characters"
+msgstr ""
+
+#: server.py:27 server.py:57
+msgid "Remember Me"
+msgstr ""
+
+#: server.py:28
+msgid "Sign In"
+msgstr ""
+
+#: server.py:37 server.py:95
+msgid "Email"
+msgstr ""
+
+#: server.py:40 server.py:98
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: server.py:47
+msgid "passwords does not match"
+msgstr ""
+
+#: server.py:51 server.py:109
+msgid "Confirm Password"
+msgstr ""
+
+#: server.py:58
+msgid "Sign Up"
+msgstr ""
+
+#: server.py:68
+msgid "About Me"
+msgstr ""
+
+#: server.py:71
+msgid "Submit"
+msgstr ""
+
+#: server.py:80
+msgid "Please use a different username."
+msgstr ""
+
+#: server.py:84
+msgid "Title"
+msgstr ""
+
+#: server.py:86
+msgid "Post Body"
+msgstr ""
+
+#: server.py:89
+msgid "Submit post"
+msgstr ""
+
+#: server.py:101
+msgid "Request Reset Password"
+msgstr ""
+
+#: server.py:112
+msgid "passwords does not match!"
+msgstr ""
+
+#: server.py:115
+msgid "Reset Password"
+msgstr ""
+
+#: server.py:157
+msgid "Invalid login credentials"
+msgstr ""
+
+#: server.py:163
+#, python-format
+msgid "welcome %(username)s, you are logged in succesfully "
+msgstr ""
+
+#: server.py:166
+#, python-format
+msgid "welcome %(username)s "
+msgstr ""
+
+#: server.py:191
+#, python-format
+msgid "welcome %(username)s your account is registered succesfully"
+msgstr ""
+
+#: server.py:242
+msgid "post deleted sucessfully"
+msgstr ""
+
+#: server.py:257
+msgid "you cannot follow your self"
+msgstr ""
+
+#: server.py:262
+#, python-format
+msgid "you are no more following %(username)s"
+msgstr ""
+
+#: server.py:266
+#, python-format
+msgid "you are now following %(username)s"
+msgstr ""
+
+#: server.py:275
+msgid ""
+"this user profile cannot be found, profile may have been deleted or "
+"suspended !"
+msgstr ""
+
+#: server.py:289
+msgid "Check your email for instructions on how to reset your password."
+msgstr ""
+
+#: server.py:305
+msgid "your password has been reset"
+msgstr ""
+
+#: templates/add_post.html:7
+msgid "Add Post"
+msgstr ""
+
+#: templates/base.html:20
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:24
+msgid "Add post"
+msgstr ""
+
+#: templates/base.html:27
+msgid "Explore"
+msgstr ""
+
+#: templates/base.html:30 templates/profile.html:6
+msgid "Profile"
+msgstr ""
+
+#: templates/base.html:33
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:37 templates/login.html:5
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:40 templates/register.html:5
+msgid "Register"
+msgstr ""
+
+#: templates/edit_profile.html:7
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/index.html:7
+msgid "No Posts"
+msgstr ""
+
+#: templates/index.html:9
+msgid "Posts"
+msgstr ""
+
+#: templates/index.html:14
+msgid "View"
+msgstr ""
+
+#: templates/index.html:22
+msgid "next page"
+msgstr ""
+
+#: templates/index.html:25
+msgid "prev page"
+msgstr ""
+
+#: templates/login.html:38
+msgid "forgot password ?"
+msgstr ""
+
+#: templates/login.html:39
+msgid "click here to reset password"
+msgstr ""
+
+#: templates/post.html:8
+#, python-format
+msgid "this post id written by %(username)s"
+msgstr ""
+
+#: templates/post.html:10
+msgid "view author profile"
+msgstr ""
+
+#: templates/post.html:15
+msgid "Edit post"
+msgstr ""
+
+#: templates/post.html:17
+msgid "Delete post"
+msgstr ""
+
+#: templates/profile.html:9
+msgid "update profile"
+msgstr ""
+
+#: templates/profile.html:11
+#, python-format
+msgid "Last seen on: %(time)s "
+msgstr ""
+
+#: templates/profile.html:12
+msgid "followers"
+msgstr ""
+
+#: templates/profile.html:12
+msgid "following"
+msgstr ""
+
+#: templates/profile.html:13 templates/user.html:7
+msgid "username"
+msgstr ""
+
+#: templates/profile.html:14 templates/user.html:18
+msgid "email"
+msgstr ""
+
+#: templates/request_reset_password.html:6 templates/reset_password.html:6
+msgid "Reset password"
+msgstr ""
+
+#: templates/user.html:6
+msgid "photo"
+msgstr ""
+
+#: templates/user.html:11
+msgid "unfollow"
+msgstr ""
+
+#: templates/user.html:13
+msgid "follow"
+msgstr ""
+
+#: templates/user.html:22
+#, python-format
+msgid "Last seen  %(time)s"
+msgstr ""
+
+#: templates/user.html:37
+msgid "view"
+msgstr ""
+
+#: templates/email/email.html:6
+msgid "Password Reset"
+msgstr ""
+
+#: templates/email/email.html:11
+msgid "Dear"
+msgstr ""
+
+#: templates/email/email.html:15
+msgid "To reset your password"
+msgstr ""
+
+#: templates/email/email.html:15
+msgid "here"
+msgstr ""
+
+#: templates/email/email.html:20
+msgid ""
+"Alternatively you can paste the following link below into your browse "
+"address bar:"
+msgstr ""
+
+#: templates/email/email.html:26
+msgid "if you have not requested a password reset, simply ignore this message."
+msgstr ""
+
+#: templates/email/email.html:29
+msgid "Yours Sincerly,"
+msgstr ""
+
+#: templates/email/email.html:32
+msgid "The Microblog Team"
+msgstr ""
+

@@ -18,7 +18,8 @@
   <sapn>{{_('email')}}: {{user.email}}</sapn>
   {% if user.last_seen %}
     <p>
-      {{'Last seen on %(time)s', time = moment(user.last_seen).format('LLL') }}
+      {{
+        _('Last seen  %(time)s', time = moment(user.last_seen).fromNow()) }}
     </p>
   {% endif %}
   <p>
