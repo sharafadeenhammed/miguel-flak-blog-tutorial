@@ -13,26 +13,62 @@ from flask_babel import _, lazy_gettext as _l
 
 # login form 
 class LoginForm(FlaskForm):
-  username = StringField('Username', validators=[validators.DataRequired()])
-  password = PasswordField('Password', description='password', validators=[validators.DataRequired(), validators.Length(min=8, message='Enter at leaast 8 characters')])
-  remember_me = BooleanField('Remember Me')
-  submit = SubmitField('Sign In')
+  username = StringField(
+    _l('Username'), 
+    validators=[validators.DataRequired()]
+  )
+  password = PasswordField(
+    _l('Password'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.Length(min=8, message=_l('Enter at leaast 8 characters'))
+    ]
+  )
+  remember_me = BooleanField(_l('Remember Me'))
+  submit = SubmitField(_l('Sign In'))
 
 # register form
 class RegisterForm(FlaskForm):
-  username = StringField('Username', validators=[validators.DataRequired()])
-  email = StringField('Email', validators=[validators.DataRequired(), validators.Email('Please enter a valid email address')])
-  password = PasswordField('Password', description='password', validators=[validators.DataRequired(), validators.Length(min=8, message='Enter at leaast 8 characters'), validators.EqualTo('confirm', 'passwords does not match')])
-  confirm = PasswordField('Confirm Password', description='confirm password', validators=[validators.DataRequired(), validators.Length(min=8, message='Enter at leaast 8 characters')])
-  remember_me = BooleanField('Remember Me')
-  submit = SubmitField('Sign Up')
+  username = StringField(
+    _l('Username'), 
+    validators=[validators.DataRequired()]
+  )
+  email = StringField(
+    _l('Email'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.Email(_l('Please enter a valid email address'))
+    ]
+  )
+  password = PasswordField(
+    _l('Password'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.Length(min=8, message=_l('Enter at leaast 8 characters')), validators.EqualTo('confirm', _l('passwords does not match'))
+    ]
+  )
+  confirm = PasswordField(
+    _l('Confirm Password'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.Length(min=8, message=_l('Enter at leaast 8 characters'))
+    ]
+  )
+  remember_me = BooleanField(_l('Remember Me'))
+  submit = SubmitField(_l('Sign Up'))
   
 
 # update user form
 class UpdateUserForm(FlaskForm):
-  username = StringField('Username', validators=[validators.DataRequired()])
-  about = TextAreaField('About Me', validators=[validators.Length( max=150)])
-  submit = SubmitField('Submit')
+  username = StringField(
+    _l('Username'), 
+    validators=[validators.DataRequired()]
+  )
+  about = TextAreaField(
+    _l('About Me'), 
+    validators=[validators.Length( max=150)]
+  )
+  submit = SubmitField(_l('Submit'))
   def __init__(self, original_username, *args, **kwargs):
     super(UpdateUserForm, self).__init__(*args, **kwargs)
     self.original_username = original_username
@@ -41,24 +77,42 @@ class UpdateUserForm(FlaskForm):
     if username.data != self.original_username:
       user = User.query.filter_by(username=self.username.data).first()
     if user is not None:
-      raise ValidationError(_('Please use a different username.'))
+      raise ValidationError(_l('Please use a different username.'))
   
 # post form 
 class PostForm(FlaskForm):
-  title = StringField('Title', validators=[validators.DataRequired()])
-  body = TextAreaField('Post Body', validators=[validators.DataRequired()])
-  submit = SubmitField('Submit post')
+  title = StringField(_l('Title'), validators=[validators.DataRequired()])
+  body = TextAreaField(
+    _l('Post Body'), 
+    validators=[validators.DataRequired()]
+  )
+  submit = SubmitField(_l('Submit post'))
   
 
 # reset password form 
 class RequestResetPassword(FlaskForm):
-  email = StringField('Email', validators=[validators.DataRequired(), validators.Email('Please enter a valid email address')])
-  submit = SubmitField('Request Reset Password')
+  email = StringField(
+    _l('Email'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.Email(_l('Please enter a valid email address'))
+    ]
+  )
+  submit = SubmitField(_l('Request Reset Password'))
   
 class ResetPassword(FlaskForm):
-  password = PasswordField('Password', validators=[validators.DataRequired()])
-  confirm_password = PasswordField('Confirm Password', validators=[validators.DataRequired(), validators.equal_to('password')])
-  submit = SubmitField('Reset Password')
+  password = PasswordField(
+    _l('Password'), 
+    validators=[validators.DataRequired()]
+  )
+  confirm_password = PasswordField(
+    _l('Confirm Password'), 
+    validators=[
+      validators.DataRequired(), 
+      validators.EqualTo('password', _l('passwords does not match!'))
+    ]
+  )
+  submit = SubmitField(_l('Reset Password'))
 
 basedir = path.abspath(path.dirname(__file__))
 static_folder = path.join(basedir, 'templates', 'styles')
@@ -109,7 +163,7 @@ def login():
       flash(_('welcome %(username)s, you are logged in succesfully ', username = form.username.data), category='success')
       login_user(user, remember=form.remember_me.data)
       return redirect(next_url)
-    flash(_('Bem-vindo %(username)s ', username = form.username.data), category='success')
+    flash(_('welcome %(username)s ', username = form.username.data), category='success')
     login_user(user, remember=form.remember_me.data)
     return redirect(url_for('index'))
       
@@ -134,7 +188,7 @@ def register():
     db.session.add(user)
     db.session.commit()
     login_user(user, remember=form.remember_me.data)
-    flash(f'welcome {user.username} your account is registered succesfully', 'success')
+    flash(_('welcome %(username)s your account is registered succesfully'), 'success', username = user.username)
     return redirect(url_for('index'))
   return render_template('register.html', title='Sign Up', form = form)
 
@@ -205,11 +259,11 @@ def follow(id):
   user = User.query.get(id)
   if(current_user.is_following(user)):
     current_user.unfollow(user)
-    flash(_('you are no more following {user.username}', 'success'))
+    flash(_('you are no more following %(username)s', username = user.username), 'success')
     return redirect(f'/user/{user.id}')
   else:
     current_user.follow(user)
-    flash(f'you are now following {user.username}', 'success')
+    flash(_('you are now following %(username)s', username = user.username), 'success')
     return redirect(f'/user/{user.id}')
 
 # display user profile...
@@ -218,7 +272,7 @@ def follow(id):
 def user_profile(id):
   user = User.query.get(id)
   if user == None:
-    flash('this user profile cannot be found, profile may have been deleted or suspended !', 'error')
+    flash(_('this user profile cannot be found, profile may have been deleted or suspended !'), 'error')
     return redirect(url_for('index'))
   return render_template('user.html', user=user, posts = user.posts)
 
@@ -232,7 +286,7 @@ def reset_password_request():
     user = User.query.filter_by(email = form.email.data).first()
     if user: 
       send_password_reset_email(user)    
-    flash('Check your email for instructions on how to reset your password.')
+    flash(_('Check your email for instructions on how to reset your password.'))
     return redirect(url_for('login'))
   
   return render_template('request_reset_password.html', form = form)
@@ -248,7 +302,7 @@ def reset_password(token):
     user.hash_password()
     db.session.add(user)
     db.session.commit()
-    flash('your password has been reset')
+    flash(_('your password has been reset'), 'success')
     return redirect(url_for('login'))
   return render_template('reset_password.html', form = form)
   
