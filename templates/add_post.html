@@ -4,7 +4,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="/static/styles/login.css">
-  <p class="header">Add Post</p>
+  <center><p class="header">{{_('Add Post')}}</p></center>
   <form method="post" action="" novalidate>
     {{form.hidden_tag()}}    
 
@@ -13,7 +13,7 @@
       {{form.title(class_='form-input')}}
       <!-- title error -->
       {% for error in form.title.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -22,7 +22,7 @@
       {{form.body(class_='form-input')}}
       <!-- body error -->
       {% for error in form.body.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
     

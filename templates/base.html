@@ -17,27 +17,27 @@
     <ul class="nav-bar">
       <p class="logo">BLOG </p>
       <li>
-        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('index')}}">{{_('Home')}}</a>
       </li>
       {% if current_user.is_authenticated %}
       <li>
-        <a href="{{url_for('add_post')}}"> Add post</a>
+        <a href="{{url_for('add_post')}}">{{_('Add post')}}</a>
       </li>
       <li>
-        <a href="{{url_for('explore')}}">Explore</a>
+        <a href="{{url_for('explore')}}">{{_('Explore')}}</a>
       </li>
       <li>
-        <a href="{{url_for('profile')}}">Profile</a>
+        <a href="{{url_for('profile')}}">{{_('Profile')}}</a>
       </li>
       <li>
-        <a href="{{url_for('logout')}}">Logout</a>
+        <a href="{{url_for('logout')}}">{{_('Logout')}}</a>
       </li>
       {% else %}
       <li>
-        <a href="/login">Login</a>
+        <a href="/login">{{_('Login')}}</a>
       </li>
       <li>
-        <a href="/register">Register</a>
+        <a href="/register">{{_('Register')}}</a>
       </li>
       {% endif %}
     </ul>
@@ -46,7 +46,7 @@
   {% with messages = get_flashed_messages(with_categories = True) %} 
     {% if messages %}
       {% for category, message in messages %}
-        <p class="msg {{category}}" > {{message}}</p>
+        <p class="msg {{category}}" > {{_(message)}}</p>
       {% endfor %}
     {% else %}
     {% endif %}

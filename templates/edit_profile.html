@@ -4,7 +4,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="/static/styles/login.css">
-  <p class="header">Edit Profile</p>
+  <center><p class="header">{{_('Edit Profile')}}</p></center>
   <form method="post" action="" novalidate>
     {{form.hidden_tag()}}
     <div class="profile-photo-container">
@@ -14,7 +14,7 @@
       {{form.username(class_='form-input', value = current_user.username)}}
       <!-- username error -->
       {% for error in form.username.errors %}
-        <p class="field-error">{{error}}</p>
+        <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -23,7 +23,7 @@
       {{form.about(class_='form-input', value = current_user.about_me)}}
       <!-- about error -->
       {% for error in form.about.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
     

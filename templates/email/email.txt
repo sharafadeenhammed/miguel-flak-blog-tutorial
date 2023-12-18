@@ -1,7 +1,9 @@
-Dear {{user.username}},
-To reset your password click on the following link:
+{{_('Dear')}} {{user.username}},
+{{_('To reset your password click on the following link:')}}
 {{url_for('reset_password', token=token, _external=True)}}
-if you have not requested a password reset, simply ignore this message.
-Sincerly,
+{{
+  _('if you have not requested a password reset, simply ignore this message.')
+}}
+{{_('Sincerly,')}}
 
-The Microblog Team
+{{_('The Microblog Team')}}

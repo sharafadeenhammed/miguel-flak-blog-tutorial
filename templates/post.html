@@ -5,16 +5,16 @@
 <p class="header">{{post.title}}</p>
 <p>
   {% if current_user.id != post.user_id %} 
-    this post id written by {{post.author.username}}
+    {{_('this post id written by %(username)s' ,username = post.author.username)}}
     &nbsp;
-    <a href="/user/{{post.author.id}}"> view author profile </a>
+    <a href="/user/{{post.author.id}}"> {{_('view author profile')}} </a>
   {% endif %}
 </p>
 
     {% if current_user.id == post.user_id %} 
-      <a class="submit-btn" style="width:80px;margin: 20px 0px;" href="/edit_post/{{post.id}}">edit</a>
+      <a class="submit-btn" style="width:80px;margin: 20px 0px;" href="/edit_post/{{post.id}}">{{_('Edit post')}}</a>
       <form method="POST" action="/post/{{post.id}}">
-        <button type="submit" class="delete-btn">delete post</button>
+        <button type="submit" class="delete-btn">{{_('Delete post')}}</button>
       </form>
     {% endif %}
   </p>

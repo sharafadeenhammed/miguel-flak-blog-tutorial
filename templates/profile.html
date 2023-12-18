@@ -3,20 +3,19 @@
 
 
 {% block content %}
-  <p class="header">Profile</p>
+  <center><p class="header">{{_('Profile')}}</p></center>
   <div class="profile-photo-container">
     <img class="profile-photo" src="{{current_user.avatar()}}" alt="photo"/>
-    <p><a href="{{url_for('update_profile')}}"> update profile</a></p>
+    <p><a href="{{url_for('update_profile')}}"> {{_('update profile')}}</a></p>
   </div>
-  {% if user.last_seen %}<p>Last seen on: {{moment(user.last_seen).format('LLL') }}</p>{% endif %}
-  <p>{{ user.follower.count() }} followers, {{ user.followed.count() }} following.</p>
-  <p>{{current_user.username}}</p>
-  <p>{{current_user.email}}</p>
-  <p>{{current_user.last_seen}}</p>
+  {% if user.last_seen %}<p>{{ _( 'Last seen on: %(time)s ', time = moment(user.last_seen).format('LLL') ) }}</p>{% endif %}
+  <p>{{ user.follower.count() }} {{_('followers')}}, {{ user.followed.count() }} {{_('following')}}.</p>
+  <p>{{_('username')}}: {{current_user.username}}</p>
+  <p>{{_('email')}}: {{current_user.email}}</p>
   {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
 
-
   <br><br>
+
   {% for post in posts %}
   <br>
       <article> 

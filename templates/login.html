@@ -2,7 +2,7 @@
 
 {% block content %}
   <link rel="stylesheet" href="/static/styles/login.css">
-  <p class="header">Login</p>
+  <center><p class="header">{{_('Login')}}</p></center>
   <form method="POST" action="" novalidate>
     {{form.hidden_tag()}}
     <!-- username error -->
@@ -11,7 +11,7 @@
       {{form.username(class_='form-input')}}
       <!-- username error -->
       {% for error in form.username.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -20,7 +20,7 @@
       {{form.password(class_='form-input')}}
       <!-- password error -->
       {% for error in form.password.errors %}
-        <p class="field-error">{{error}}</p>
+        <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -35,8 +35,8 @@
 
   </form>
   <p>
-    forgot password ?
-    <a href="{{url_for('reset_password_request')}}">click here to reset password</a>
+    {{_('forgot password ?')}}
+    <a href="{{url_for('reset_password_request')}}"> {{_('click here to reset password')}}</a>
   </p>
 
 {% endblock %}

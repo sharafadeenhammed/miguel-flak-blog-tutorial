@@ -2,7 +2,7 @@
 
 {% block content %}
   <link rel="stylesheet" href="/static/styles/login.css">
-  <p class="header">Register</p>
+  <center><p class="header">{{_('Register')}}</p></center>
   <form method="POST" action="" novalidate>
     {{form.hidden_tag()}}
     <!-- user name container -->
@@ -11,7 +11,7 @@
       {{form.username(class_='form-input')}}
       <!-- username error -->
       {% for error in form.username.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -21,7 +21,7 @@
       {{form.email(class_='form-input')}}
       <!-- email error -->
       {% for error in form.email.errors %}
-      <p class="field-error">{{error}}</p>
+      <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -31,7 +31,7 @@
       {{form.password(class_='form-input')}}
       <!-- password error -->
       {% for error in form.password.errors %}
-        <p class="field-error">{{error}}</p>
+        <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 
@@ -41,7 +41,7 @@
       {{form.confirm(class_='form-input')}}
       <!-- confirm error -->
       {% for error in form.confirm.errors %}
-        <p class="field-error">{{error}}</p>
+        <p class="field-error">{{_(error)}}</p>
       {% endfor %}
     </div>
 

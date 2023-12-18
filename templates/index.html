@@ -4,14 +4,14 @@
   <link rel="stylesheet" href="/static/styles/login.css"/>
   <br>
     {% if posts.items|length < 1 %}
-      <center> <h2 class="header">No Posts </h2></center>
+      <center> <h2 class="header">{{_('No Posts')}} </h2></center>
     {% else %}
-      <center> <h2 class="header">Posts </h2></center>
+      <center> <h2 class="header">{{_('Posts')}} </h2></center>
     {% endif %}
     {% for post in posts.items %}
       <p>
         <img src="{{post.author.avatar(40)}}">
-        <a href="/post/{{post.id}}">view</a>
+        <a href="/post/{{post.id}}">{{_('View')}}</a>
         <span>&nbsp;</span>
       </p>
       <article> {{post.body}}</article>
@@ -19,10 +19,10 @@
     {% endfor %}
     <br>
     {% if posts.has_next %}
-      <a class="submit-btn" style="width:150px" href="?page={{posts.next_num}}"> next page</a>
+      <a class="submit-btn" style="width:150px" href="?page={{posts.next_num}}"> {{_('next page')}}</a>
     {% endif %}
     {% if posts.has_prev %}
-      <a class="submit-btn" style="width:150px" href="?page={{posts.prev_num}}"> prev page</a>
+      <a class="submit-btn" style="width:150px" href="?page={{posts.prev_num}}"> {{_('prev page')}}</a>
     {% endif %}
   {% endblock %}
 

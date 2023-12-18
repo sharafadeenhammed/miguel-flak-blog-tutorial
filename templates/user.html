@@ -3,22 +3,28 @@
 
 {% block content %}
 <section>
-  <img src="{{user.avatar(100)}}" alt="photo">
-  <span>username:  {{user.username}}</span>
+  <img src="{{user.avatar(100)}}" alt="{{_('photo')}}">
+  <span>{{_('username')}}: {{user.username}}</span>
   <span> &nbsp;</span>
     {% if current_user.id != user.id %}
       {% if current_user.is_following(user) %}
-        <a href="/follow/{{user.id}}"> unfollow </a>
+        <a href="/follow/{{user.id}}"> {{_('unfollow')}} </a>
       {% else %}
-        <a href="/follow/{{user.id}}"> follow </a>
+        <a href="/follow/{{user.id}}"> {{_('follow')}} </a>
       {% endif %}
     {% endif %}
   
   <br>
-  <sapn>email: {{user.email}}</sapn>
+  <sapn>{{_('email')}}: {{user.email}}</sapn>
+  {% if user.last_seen %}
+    <p>
+      {{'Last seen on %(time)s', time = moment(user.last_seen).format('LLL') }}
+    </p>
+  {% endif %}
+  <p>
+    {{ user.follower.count() }} followers, {{ user.followed.count() }} following.
+  </p>
   {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-  {% if user.last_seen %}<p>Last seen on: {{ moment(user.last_seen).format('LLL') }}</p>{% endif %}
-  <p>{{ user.follower.count() }} followers, {{ user.followed.count() }} following.</p>
 </section>
 
 <section>
@@ -27,7 +33,7 @@
       <p>
         {{post.title}}
         &nbsp;
-        <a href="/post/{{post.id}}">view</a>
+        <a href="/post/{{post.id}}">{{_('view')}}</a>
       </p>
       <br>
     {% endfor %}
