@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
-from flask_babel import Babel
+from flask_babel import Babel, lazy_gettext as _l
 from config import Config
 
 def get_locale():
@@ -19,6 +19,7 @@ ma = Marshmallow(app)
 migration = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message = _l('Please log in to access this page.')
 login.login_message_category = 'warning'
 mail = Mail(app)
 moment = Moment(app=app)
