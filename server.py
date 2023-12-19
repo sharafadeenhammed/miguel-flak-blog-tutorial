@@ -1,8 +1,8 @@
 from os import path, mkdir
-from app import app, db
+from app import app, db , get_locale
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, g
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, validators, TextAreaField, ValidationError
 from models import User, Post
@@ -123,6 +123,7 @@ static_folder = path.join(basedir, 'templates', 'styles')
 def validate():
   if current_user.is_authenticated:
     current_user.update_last_seen()
+  g.locale =  (str(get_locale()))
 
 # home route
 @app.route("/")

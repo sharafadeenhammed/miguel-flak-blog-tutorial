@@ -20,6 +20,7 @@ flask-moment = "*"
 flask-babel = "*"
 jinja2 = "*"
 setuptools = "*"
+langdetect = "*"
 
 [dev-packages]
 
