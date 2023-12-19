@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 08:47+0100\n"
+"POT-Creation-Date: 2023-12-19 18:20+0100\n"
 "PO-Revision-Date: 2023-12-19 08:51+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,136 +18,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: app.py:24
-msgid "Please log in to access this page."
-msgstr "msgstr "Por favor inicie sesión para acceder a esta página."
-
-#: server.py:17 server.py:33 server.py:64
-msgid "Username"
-msgstr "Nombre de usuario"
-
-#: server.py:21 server.py:44 server.py:105
-msgid "Password"
-msgstr "Contraseña"
-
-#: server.py:24 server.py:47 server.py:54
-msgid "Enter at leaast 8 characters"
-msgstr "Introduzca al menos 8 caracteres"
-
-#: server.py:27 server.py:57
-msgid "Remember Me"
-msgstr "Acuérdate de mí"
-
-#: server.py:28
-msgid "Sign In"
-msgstr "Iniciar sesión"
-
-#: server.py:37 server.py:95
-msgid "Email"
-msgstr "Correo electrónico"
-
-#: server.py:40 server.py:98
-msgid "Please enter a valid email address"
-msgstr "Por favor, introduce una dirección de correo electrónico válida"
-
-#: server.py:47
-msgid "passwords does not match"
-msgstr "Las contraseñas no coinciden"
-
-#: server.py:51 server.py:109
-msgid "Confirm Password"
-msgstr "confirmar Contraseña"
-
-#: server.py:58
-msgid "Sign Up"
-msgstr "Inscribirse"
-
-#: server.py:68
-msgid "About Me"
-msgstr "Acerca de mí"
-
-#: server.py:71
-msgid "Submit"
-msgstr "Entregar"
-
-#: server.py:80
-msgid "Please use a different username."
-msgstr "Utilice un nombre de usuario diferente."
-
-#: server.py:84
-msgid "Title"
-msgstr "Título"
-
-#: server.py:86
-msgid "Post Body"
-msgstr ""
-
-#: server.py:89
-msgid "Submit post"
-msgstr "Cuerpo de la publicación"
-
-#: server.py:101
-msgid "Request Reset Password"
-msgstr "Solicitar restablecer contraseña"
-
-#: server.py:112
-msgid "passwords does not match!"
-msgstr "¡Las contraseñas no coinciden!"
-
-#: server.py:115
-msgid "Reset Password"
-msgstr "Restablecer la contraseña"
-
-#: server.py:157
+#: server.py:159
 msgid "Invalid login credentials"
 msgstr "Credenciales de acceso invalidos"
 
-#: server.py:163
+#: server.py:165
 #, python-format
 msgid "welcome %(username)s, you are logged in succesfully "
 msgstr "Bienvenida %(username)s, ha iniciado sesión con éxito"
 
-#: server.py:166
+#: server.py:168
 #, python-format
 msgid "welcome %(username)s "
 msgstr "bienvenida %(username)s"
 
-#: server.py:191
+#: server.py:193
 #, python-format
 msgid "welcome %(username)s your account is registered succesfully"
 msgstr "bienvenido %(username)s su cuenta se registró exitosamente"
 
-#: server.py:242
+#: server.py:253
 msgid "post deleted sucessfully"
 msgstr "publicación eliminada exitosamente"
 
-#: server.py:257
+#: server.py:268
 msgid "you cannot follow your self"
 msgstr "no puedes seguirte a ti mismo"
 
-#: server.py:262
+#: server.py:273
 #, python-format
 msgid "you are no more following %(username)s"
 msgstr "Ya no sigues a %(username)s"
 
-#: server.py:266
+#: server.py:277
 #, python-format
 msgid "you are now following %(username)s"
 msgstr "Ahora estás siguiendo a %(username)s."
 
-#: server.py:275
+#: server.py:286
 msgid ""
 "this user profile cannot be found, profile may have been deleted or "
 "suspended !"
-msgstr "¡No se puede encontrar este perfil de usuario, es posible que el perfil haya sido eliminado o suspendido!"
+msgstr ""
+"¡No se puede encontrar este perfil de usuario, es posible que el perfil "
+"haya sido eliminado o suspendido!"
 
-#: server.py:289
+#: server.py:300
 msgid "Check your email for instructions on how to reset your password."
-msgstr "Consulte su correo electrónico para obtener instrucciones sobre cómo restablecer su contraseña."
+msgstr ""
+"Consulte su correo electrónico para obtener instrucciones sobre cómo "
+"restablecer su contraseña."
 
-#: server.py:305
+#: server.py:316
 msgid "your password has been reset"
 msgstr "Tu contraseña ha sido restablecida"
+
+#: translate.py:9
+msgid "application not configured for tranlation"
+msgstr "aplicación no configurada para traducción"
+
+#: translate.py:22
+msgid "Error tranlating post !"
+msgstr "Error al traducir la publicación"
 
 #: templates/add_post.html:7
 msgid "Add Post"
@@ -301,12 +233,14 @@ msgid ""
 "Alternatively you can paste the following link below into your browse "
 "address bar:"
 msgstr ""
-"Como alternativa, puedes pegar el siguiente enlace a continuación en tu navegador "
-"Barra de dirección:"
+"Como alternativa, puedes pegar el siguiente enlace a continuación en tu "
+"navegador Barra de dirección:"
 
 #: templates/email/email.html:26
 msgid "if you have not requested a password reset, simply ignore this message."
-msgstr "Si no ha solicitado un restablecimiento de contraseña, simplemente ignore este mensaje."
+msgstr ""
+"Si no ha solicitado un restablecimiento de contraseña, simplemente ignore"
+" este mensaje."
 
 #: templates/email/email.html:29
 msgid "Yours Sincerly,"
@@ -315,4 +249,64 @@ msgstr "Atentamente,"
 #: templates/email/email.html:32
 msgid "The Microblog Team"
 msgstr "El equipo de Microblog"
+
+#~ msgid "Please log in to access this page."
+#~ msgstr "msgstr \"Por favor inicie sesión para acceder a esta página."
+
+#~ msgid "Username"
+#~ msgstr "Nombre de usuario"
+
+#~ msgid "Password"
+#~ msgstr "Contraseña"
+
+#~ msgid "Enter at leaast 8 characters"
+#~ msgstr "Introduzca al menos 8 caracteres"
+
+#~ msgid "Remember Me"
+#~ msgstr "Acuérdate de mí"
+
+#~ msgid "Sign In"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "Email"
+#~ msgstr "Correo electrónico"
+
+#~ msgid "Please enter a valid email address"
+#~ msgstr "Por favor, introduce una dirección de correo electrónico válida"
+
+#~ msgid "passwords does not match"
+#~ msgstr "Las contraseñas no coinciden"
+
+#~ msgid "Confirm Password"
+#~ msgstr "confirmar Contraseña"
+
+#~ msgid "Sign Up"
+#~ msgstr "Inscribirse"
+
+#~ msgid "About Me"
+#~ msgstr "Acerca de mí"
+
+#~ msgid "Submit"
+#~ msgstr "Entregar"
+
+#~ msgid "Please use a different username."
+#~ msgstr "Utilice un nombre de usuario diferente."
+
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#~ msgid "Post Body"
+#~ msgstr ""
+
+#~ msgid "Submit post"
+#~ msgstr "Cuerpo de la publicación"
+
+#~ msgid "Request Reset Password"
+#~ msgstr "Solicitar restablecer contraseña"
+
+#~ msgid "passwords does not match!"
+#~ msgstr "¡Las contraseñas no coinciden!"
+
+#~ msgid "Reset Password"
+#~ msgstr "Restablecer la contraseña"
 

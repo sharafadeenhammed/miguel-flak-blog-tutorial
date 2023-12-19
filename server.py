@@ -2,13 +2,15 @@ from os import path, mkdir
 from app import app, db , get_locale
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import render_template, request, flash, redirect, url_for, g
+from flask import render_template, request, flash, redirect, url_for, g, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, validators, TextAreaField, ValidationError
 from models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
 from mail import send_password_reset_email
 from flask_babel import _, lazy_gettext as _l
+from langdetect import detect, LangDetectException
+from translate import translate
 
 
 # login form 
@@ -220,6 +222,15 @@ def add_post():
   form = PostForm()
   if form.validate_on_submit():
     post = Post(form.body.data, form.title.data, current_user.id)
+    try: 
+      language = detect(form.body.data)
+      print('detected language: ', language)
+    
+    except LangDetectException:
+      print('faled to detect language...')
+      language = ''
+    print('detected language: ', language)
+    post.language = language
     db.session.add(post)
     db.session.commit()
     flash('post added', 'success')
@@ -306,7 +317,13 @@ def reset_password(token):
     flash(_('your password has been reset'), 'success')
     return redirect(url_for('login'))
   return render_template('reset_password.html', form = form)
-  
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+  data = request.get_json()
+  translated_text = translate(data['language'], data['target'], data['text'] )
+  return {'text': translated_text}
 
 
 

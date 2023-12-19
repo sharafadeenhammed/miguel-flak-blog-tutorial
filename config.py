@@ -17,3 +17,6 @@ class Config:
   ADMINS = ['your-email@example.com']
   TESTING = True
   LANGUAGES = ['en', 'es']
+  X_RAPIDAPI_KEY = environ.get('X_RAPIDAPI_KEY') or None
+  X_RAPIDAPI_HOST = environ.get('X_RAPIDAPI_HOST') or None
+  
