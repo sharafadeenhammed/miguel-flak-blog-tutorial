@@ -123,6 +123,7 @@ class Post(db.Model):
   title = db.Column(db.String(20), nullable = False)
   timestamp = db.Column(db.DateTime, default=datetime.utcnow, index = True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  language = db.Column(db.String(20))
     
   def __init__(self, body, title, user_id,):
     self.user_id = user_id
