@@ -14,7 +14,27 @@
         <a href="/post/{{post.id}}">{{_('View')}}</a>
         <span>&nbsp;</span>
       </p>
-      <article> {{post.body}}</article>
+      <span id="post{{post.id}}">
+        {{post.body}}
+      </span>
+      {% if post.language != g.locale %}
+        <span id="translate{{post.id}}">
+        </span>
+        <a href="javascript:translate(
+          'post{{post.id}}',
+          'translate{{post.id}}',
+          '{{g.locale}}', 
+          '{{post.language}}',
+          'button{{post.id}}'
+        )
+          " 
+          style="color: #414040; ;padding:3px; text-decoration:none; background-color: #dad4d4; font-size: 12px; border-radius: 5px;"
+          id="button{{post.id}}"
+          > 
+             {{ _('translate')}}
+          </a>
+      {% endif %}
+      <br>
       <br>
     {% endfor %}
     <br>
@@ -24,5 +44,8 @@
     {% if posts.has_prev %}
       <a class="submit-btn" style="width:150px" href="?page={{posts.prev_num}}"> {{_('prev page')}}</a>
     {% endif %}
+    
+    <script src="/static/js/index.js"></script>
   {% endblock %}
+  
 

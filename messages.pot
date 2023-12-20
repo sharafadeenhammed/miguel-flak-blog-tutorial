@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 18:20+0100\n"
+"POT-Creation-Date: 2023-12-20 14:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: server.py:159
+#: server.py:160
 msgid "Invalid login credentials"
 msgstr ""
 
-#: server.py:165
+#: server.py:166
 #, python-format
 msgid "welcome %(username)s, you are logged in succesfully "
 msgstr ""
 
-#: server.py:168
+#: server.py:169
 #, python-format
 msgid "welcome %(username)s "
 msgstr ""
 
-#: server.py:193
+#: server.py:194
 #, python-format
 msgid "welcome %(username)s your account is registered succesfully"
 msgstr ""
 
-#: server.py:253
+#: server.py:254
 msgid "post deleted sucessfully"
 msgstr ""
 
-#: server.py:268
+#: server.py:273
+msgid "post updated"
+msgstr ""
+
+#: server.py:282
 msgid "you cannot follow your self"
 msgstr ""
 
-#: server.py:273
+#: server.py:287
 #, python-format
 msgid "you are no more following %(username)s"
 msgstr ""
 
-#: server.py:277
+#: server.py:291
 #, python-format
 msgid "you are now following %(username)s"
 msgstr ""
 
-#: server.py:286
+#: server.py:300
 msgid ""
 "this user profile cannot be found, profile may have been deleted or "
 "suspended !"
 msgstr ""
 
-#: server.py:300
+#: server.py:314
 msgid "Check your email for instructions on how to reset your password."
 msgstr ""
 
-#: server.py:316
+#: server.py:330
 msgid "your password has been reset"
 msgstr ""
 
@@ -72,7 +76,7 @@ msgstr ""
 msgid "application not configured for tranlation"
 msgstr ""
 
-#: translate.py:22
+#: translate.py:21
 msgid "Error tranlating post !"
 msgstr ""
 
@@ -108,6 +112,10 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+#: templates/edit_post.html:7
+msgid "Edit Post"
+msgstr ""
+
 #: templates/edit_profile.html:7
 msgid "Edit Profile"
 msgstr ""
@@ -124,11 +132,15 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: templates/index.html:22
+#: templates/index.html:30
+msgid "translate"
+msgstr ""
+
+#: templates/index.html:37
 msgid "next page"
 msgstr ""
 
-#: templates/index.html:25
+#: templates/index.html:40
 msgid "prev page"
 msgstr ""
 
@@ -225,7 +237,7 @@ msgstr ""
 
 #: templates/email/email.html:20
 msgid ""
-"Alternatively you can paste the following link below into your browse "
+"Alternatively you can paste the following link below into your browser "
 "address bar:"
 msgstr ""
 

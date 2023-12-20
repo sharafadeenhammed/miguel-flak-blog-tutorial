@@ -255,11 +255,24 @@ def delete_post(id):
   return redirect(url_for('index'))
 
 # update/edit post
-@app.route('/edit_post/<id>')
+@app.route('/edit_post/<id>', methods=['POST', 'GET'])
 @login_required
 def edit_post(id):
+  form = PostForm()
   post = Post.query.get_or_404(int(id))
-  return render_template('post.html', post=post)
+  if form.validate_on_submit():
+    try:
+      language = detect(form.body.data)
+    except LangDetectException:
+      language = ''
+    post.body = form.body.data
+    post.title = form.title.data
+    post.language = language
+    db.session.add(post)
+    db.session.commit()
+    flash(_('post updated'), 'success')
+    return redirect(url_for('index'))
+  return render_template('edit_post.html', form=form, post=post)
 
 # fololow user
 @app.route('/follow/<id>')
@@ -322,7 +335,7 @@ def reset_password(token):
 @login_required
 def translate_text():
   data = request.get_json()
-  translated_text = translate(data['language'], data['target'], data['text'] )
+  translated_text = translate(data['language'], data['target_language'], data['text'] )
   return {'text': translated_text}
 
 
