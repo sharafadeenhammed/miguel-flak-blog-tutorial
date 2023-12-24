@@ -21,6 +21,7 @@ flask-babel = "*"
 jinja2 = "*"
 setuptools = "*"
 langdetect = "*"
+elasticsearch = "*"
 
 [dev-packages]
 
